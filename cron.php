@@ -1,6 +1,6 @@
 <?php
 /*
- * Evelite Cron Manager
+ * Tikapot Cron Manager
  *
  * This file should be run once every minute
  *

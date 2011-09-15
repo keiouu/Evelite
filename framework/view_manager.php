@@ -6,6 +6,16 @@
  * Licensed under the GNU General Public License version 3.
  * See LICENSE.txt
  */
+ 
+global $home_dir;
+require_once($home_dir . "framework/view.php");
+
+class Default404 extends View {
+	public function __construct() { parent::__construct("/404.php"); }
+	public function render($request) {
+		print "Error: That page does not exist!";
+	}
+}
 
 class ViewManager
 {
@@ -20,7 +30,11 @@ class ViewManager
 	}
 	
 	public function get($url) {
-		return $this->views[$url];
+		if (isset($this->views[$url]))
+			return $this->views[$url];
+		if ($url == "/404.php")
+			return new Default404();
+		return $this->get("/404.php");
 	}
 }
 

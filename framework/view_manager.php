@@ -30,8 +30,11 @@ class ViewManager
 	}
 	
 	public function get($url) {
+		global $home_dir;
 		if (isset($this->views[$url]))
 			return $this->views[$url];
+		if (file_exists($home_dir . $url))
+			return new View($url, $home_dir . $url);
 		if ($url == "/404.php")
 			return new Default404();
 		return $this->get("/404.php");

@@ -8,7 +8,7 @@
  */
 
 $title = "Test Page | Evelite";
-include("header.php");
+include("includes/header.php");
 ?>
 
 <h1>Welcome to the Evelite test suite!</h1>
@@ -16,8 +16,7 @@ include("header.php");
 <div style="width: 100%; height: 40px; border-bottom: 1px #555 dotted;"></div>
 
 <?php
-global $home_dir;
-include($home_dir . "tests/init.php");
-include("footer.php");
+include(home_dir . "tests/init.php");
+include("includes/footer.php");
 ?>
 

@@ -8,18 +8,20 @@
  */
 
 $title = "Home Page | Evelite";
-include("header.php");
+include("includes/header.php");
 ?>
 
 <h1>Welcome to Evelite!</h1>
 <ul>
 <li><a href="/admin/">Admin Portal</a></li>
 <li><a href="/test/">Run Tests</a></li>
+<li><a href="/login/">Login</a></li>
+<li><a href="/register/">Register</a></li>
 </ul>
 
 <?php
 if ($request->get_page_load_time() !== False)
 	print "<p>Page loaded in: " . $request->get_page_load_time() . " seconds</p>";
-include("footer.php");
+include("includes/footer.php");
 ?>
 

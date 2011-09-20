@@ -7,9 +7,8 @@
  * See LICENSE.txt
  */
  
-global $home_dir;
-require_once($home_dir . "framework/model.php");
-require_once($home_dir . "framework/model_fields/init.php");
+require_once(home_dir . "framework/model.php");
+require_once(home_dir . "framework/model_fields/init.php");
 
 ?>
 

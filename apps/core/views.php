@@ -7,14 +7,12 @@
  * See LICENSE.txt
  */
 
-global $home_dir;
-require_once($home_dir . "framework/view.php");
+require_once(home_dir . "framework/view.php");
 
 class IndexView extends View
 {
 	public function __construct() {
-		global $home_dir;
-		parent::__construct("/", $home_dir . "apps/core/templates/index.php");
+		parent::__construct("/", home_dir . "apps/core/templates/index.php");
 	}
 	 
 	/* Request is a 'Request' object. */

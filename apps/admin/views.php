@@ -7,14 +7,12 @@
  * See LICENSE.txt
  */
 
-global $home_dir;
-require_once($home_dir . "framework/view.php");
+require_once(home_dir . "framework/view.php");
 
 class AdminIndexView extends View
 {
 	public function __construct() {
-		global $home_dir;
-		parent::__construct("/admin/", $home_dir . "apps/admin/templates/index.php");
+		parent::__construct("/admin/", home_dir . "apps/admin/templates/index.php");
 	}
 	 
 	/* Request is a 'Request' object. */

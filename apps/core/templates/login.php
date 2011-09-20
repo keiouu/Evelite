@@ -7,11 +7,11 @@
  * See LICENSE.txt
  */
 
-$title = "Register | Evelite";
+$title = "Login | Evelite";
 include("includes/header.php");
 ?>
 
-<h1>Registration</h1>
+<h1>Login</h1>
 <ul>
 <li><a href="/">Home</a></li>
 </ul>

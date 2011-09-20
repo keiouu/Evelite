@@ -7,7 +7,7 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
 
 class NumericField extends ModelField
 {

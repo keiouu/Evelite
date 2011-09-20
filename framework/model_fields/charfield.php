@@ -7,14 +7,14 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
 
 class CharField extends ModelField
 {
 	protected static $db_type = "VARCHAR";
 	private $max_length = 0;
 	
-	public function __construct($default = "", $max_length = 0, $_extra = "") {
+	public function __construct($max_length = 0, $default = "", $_extra = "") {
 			parent::__construct($default, $_extra);
 			$this->max_length = $max_length;
 	}

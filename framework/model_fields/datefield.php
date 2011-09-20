@@ -7,17 +7,24 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
 
 class DateField extends ModelField
 {
+	public static $FORMAT = "Y-m-d";
 	protected static $db_type = "date";
 	private $auto_now_add = False, $auto_now = False;
 	
-	public function __construct($default = "", $auto_now_add = False, $auto_now = False, $_extra = "") {
+	public function __construct($auto_now_add = False, $auto_now = False, $default = "", $_extra = "") {
 			parent::__construct($default, $_extra);
 			$this->auto_now_add = $auto_now_add;
 			$this->auto_now = $auto_now;
+	}
+	
+	/* This recieves pre-save signal from it's model. */
+	public function pre_save($model, $update) {
+		if ($this->auto_now || (!$update && $this->auto_now_add))
+			$this->value = date(static::$FORMAT, time());
 	}
 	
 	public function sql_value($db, $val = NULL) {

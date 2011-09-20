@@ -7,8 +7,7 @@
  * See LICENSE.txt
  */
 
-global $home_dir;
-require_once($home_dir . "framework/database.php");
+require_once(home_dir . "framework/database.php");
 
 class ModelQueryException extends Exception { }
 
@@ -62,7 +61,7 @@ class ModelQuery implements Iterator, Countable
 				}
 				
 				if ($clause === "WHERE") {
-					if ($count > 1)
+					if ($count > 0)
 						$query .= " AND "; # TODO - implement OR etc
 					$query .= $name;
 					if (is_array($val))
@@ -83,7 +82,7 @@ class ModelQuery implements Iterator, Countable
 			if ($clause === "ONLY")
 				$selection .= ")";
 		}
-		$this->_built_queries[$selection] = "SELECT $selection FROM " . $this->_model->get_table_name() . "$query;";
+		$this->_built_queries[$selection] = "SELECT $selection FROM \"" . $this->_model->get_table_name() . "\"$query;";
 		return $this->_built_queries[$selection];
 	}
 	

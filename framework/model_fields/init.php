@@ -8,15 +8,16 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
-include_once("charfield.php");
-include_once("intfield.php");
-include_once("bigintfield.php");
-include_once("numericfield.php");
-include_once("pkfield.php");
-include_once("booleanfield.php");
-include_once("datefield.php");
-include_once("datetimefield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
+include_once(home_dir . "framework/model_fields/charfield.php");
+include_once(home_dir . "framework/model_fields/intfield.php");
+include_once(home_dir . "framework/model_fields/bigintfield.php");
+include_once(home_dir . "framework/model_fields/numericfield.php");
+include_once(home_dir . "framework/model_fields/pkfield.php");
+include_once(home_dir . "framework/model_fields/booleanfield.php");
+include_once(home_dir . "framework/model_fields/datefield.php");
+include_once(home_dir . "framework/model_fields/datetimefield.php");
+include_once(home_dir . "framework/model_fields/fkfield.php");
 
 ?>
 

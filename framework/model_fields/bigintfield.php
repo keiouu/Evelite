@@ -7,7 +7,7 @@
  * See LICENSE.txt
  */
 
-require_once("intfield.php");
+require_once(home_dir . "framework/model_fields/intfield.php");
 
 class BigIntField extends IntField
 {

@@ -10,13 +10,13 @@
 $time = microtime(True);
 
 ini_set('display_errors', '1');
+define("home_dir", dirname(__FILE__) . '/');
 
-$home_dir = dirname(__FILE__) . '/';
-require_once($home_dir . "config.php");
-require_once($home_dir . "framework/view_manager.php");
-require_once($home_dir . "framework/app_loader.php");
-require_once($home_dir . "framework/request.php");
-require_once($home_dir . "contrib/timer.php");
+require_once(home_dir . "config.php");
+require_once(home_dir . "framework/view_manager.php");
+require_once(home_dir . "framework/app_loader.php");
+require_once(home_dir . "framework/request.php");
+require_once(home_dir . "contrib/timer.php");
 
 $view_manager = new ViewManager();
 load_applications();

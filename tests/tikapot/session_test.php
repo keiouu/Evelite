@@ -7,9 +7,8 @@
  * See LICENSE.txt
  */
  
-global $home_dir;
-require_once($home_dir . "lib/simpletest/autorun.php");
-require_once($home_dir . "contrib/session.php");
+require_once(home_dir . "lib/simpletest/autorun.php");
+require_once(home_dir . "contrib/session.php");
 
 
 class SessionTest extends UnitTestCase {

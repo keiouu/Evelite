@@ -6,10 +6,9 @@
  * Licensed under the GNU General Public License version 3.
  * See LICENSE.txt
  */
- 
-global $home_dir;
-require_once($home_dir . "lib/simpletest/autorun.php");
-require_once($home_dir . "contrib/timer.php");
+
+require_once(home_dir . "lib/simpletest/autorun.php");
+require_once(home_dir . "contrib/timer.php");
 
 
 class TimerTest extends UnitTestCase {

@@ -8,8 +8,8 @@
  * See LICENSE.txt
  */
 
-include_once("databases/mysql.php");
-include_once("databases/postgres.php");
+include_once(home_dir . "framework/databases/mysql.php");
+include_once(home_dir . "framework/databases/postgres.php");
 
 class NotConnectedException extends Exception { }
 class QueryException extends Exception { }

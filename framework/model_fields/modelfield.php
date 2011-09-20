@@ -29,6 +29,10 @@ abstract class ModelField
 		return $this->value;
 	}
 	
+	public function get_db_type() {
+		return static::$db_type;
+	}
+	
 	public function sql_value($db, $val = NULL) {
 		$val = ($val == NULL) ? $this->value : $val;
 		return (strlen("" . $val)  > 0) ? $val : "NULL";
@@ -45,7 +49,7 @@ abstract class ModelField
 	public abstract function validate();
 
 	public function db_create_query($db, $name, $table_name) {
-		return $name . " " . static::$db_type;
+		return $name . " " . $this->get_db_type();
 	}
 	
 	/* This allows subclasses to provide end-of-statement additions such as constraints */
@@ -62,6 +66,9 @@ abstract class ModelField
 	public function db_extra_create_query_post($db, $name, $table_name) {
 		return "";
 	}
+	
+	/* This recieves pre-save signal from it's model. */
+	public function pre_save($model, $update) {}
 }
 
 ?>

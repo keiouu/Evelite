@@ -8,8 +8,7 @@
  * See LICENSE.txt
  */
 
-global $home_dir;
-require_once($home_dir . "framework/database.php");
+require_once(home_dir . "framework/database.php");
 
 class MySQL extends Database
 {

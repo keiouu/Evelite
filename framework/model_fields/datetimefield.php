@@ -7,11 +7,12 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
-require_once("datefield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
+require_once(home_dir . "framework/model_fields/datefield.php");
 
 class DateTimeField extends DateField
 {
+	public static $FORMAT = "Y-m-d H:i:s";
 	protected static $db_type = "timestamp";
 	
 	public function validate() {

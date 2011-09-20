@@ -7,13 +7,13 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
 
 class BooleanField extends ModelField
 {
 	protected static $db_type = "boolean";
 	
-	public function __construct($default = "False") {
+	public function __construct($default = false) {
 		parent::__construct($default);
 	}
 	
@@ -23,7 +23,7 @@ class BooleanField extends ModelField
 	}
 	
 	public function sql_value($db, $val = NULL) {
-		$val = ($val == NULL) ? $this->value : $val;
+		$val = ($val == NULL) ? (($this->get_value()) ? "true" : "false") : $val;
 		if (strlen($val) == 0)
 			return $this->default_value;
 		$val = strtolower($val);
@@ -34,7 +34,7 @@ class BooleanField extends ModelField
 	public function validate() {
 		$valid = $this->value === true || $this->value === false;
 		if (!$valid)
-			array_push($this->errors, "Error: Boolean did not validate: " . $this->value);
+			array_push($this->errors, "Error: Boolean did not validate: " . $this->get_value());
 		return $valid;
 	}
 }

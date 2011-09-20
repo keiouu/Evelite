@@ -6,9 +6,8 @@
  * Licensed under the GNU General Public License version 3.
  * See LICENSE.txt
  */
- 
-global $home_dir;
-require_once($home_dir . "framework/view.php");
+
+require_once(home_dir . "framework/view.php");
 
 class Default404 extends View {
 	public function __construct() { parent::__construct("/404.php"); }

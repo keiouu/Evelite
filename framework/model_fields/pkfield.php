@@ -7,7 +7,7 @@
  * See LICENSE.txt
  */
 
-require_once("bigintfield.php");
+require_once(home_dir . "framework/model_fields/bigintfield.php");
 
 class PKField extends BigIntField
 {

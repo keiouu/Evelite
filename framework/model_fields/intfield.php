@@ -7,16 +7,16 @@
  * See LICENSE.txt
  */
 
-require_once("modelfield.php");
+require_once(home_dir . "framework/model_fields/modelfield.php");
 
 class IntField extends ModelField
 {
 	protected static $db_type = "INT";
 	private $max_length = 0, $auto_increment = False;
 	
-	public function __construct($default = 0, $max_length = 0, $auto_increment = False, $_extra = "") {
+	public function __construct($default = 0, $max_length = 50, $auto_increment = False, $_extra = "") {
 			parent::__construct($default, $_extra);
-			$this->max_length = $max_length;
+			$this->max_length = ($max_length > 0) ? $max_length : 50;
 			$this->auto_increment = $auto_increment;
 			$this->hide_from_query = $auto_increment;
 	}

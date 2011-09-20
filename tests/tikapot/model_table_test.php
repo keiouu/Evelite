@@ -7,11 +7,10 @@
  * See LICENSE.txt
  */
  
-global $home_dir;
-require_once($home_dir . "lib/simpletest/autorun.php");
-require_once($home_dir . "framework/model.php");
-require_once($home_dir . "framework/model_query.php");
-require_once($home_dir . "framework/database.php");
+require_once(home_dir . "lib/simpletest/autorun.php");
+require_once(home_dir . "framework/model.php");
+require_once(home_dir . "framework/model_query.php");
+require_once(home_dir . "framework/database.php");
 
 class TestTableModel extends Model
 {

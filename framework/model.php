@@ -7,13 +7,13 @@
  * See LICENSE.txt
  */
 
-global $home_dir;
-require_once($home_dir . "framework/database.php");
-require_once($home_dir . "framework/model_query.php");
-require_once($home_dir . "framework/model_fields/init.php");
+require_once(home_dir . "framework/database.php");
+require_once(home_dir . "framework/model_query.php");
+require_once(home_dir . "framework/model_fields/init.php");
 
 class ValidationException extends Exception { }
 class TableValidationException extends ValidationException { }
+class ModelExistsException extends Exception {}
 
 abstract class Model
 {
@@ -81,6 +81,12 @@ abstract class Model
 		return static::get_modelquery(array("WHERE" => $parsed_query));
 	}
 	
+	// Do the given object values exist in the database?
+	public static function exists($query) {
+		$lst = static::find($query);
+		return count($len) > 0;
+	}
+	
 	// Allows access to stored models
 	// Returns a single object
 	// Errors if multiple objects are found or no objects are found
@@ -118,6 +124,21 @@ abstract class Model
 		return array($obj, $created);
 	}
 	
+	public static function create($args = array()) {
+		if (count($args) <= 0)
+			return Null;
+		try {
+			$obj = static::get($args);
+		}
+		catch (ModelQueryException $e) {
+			$obj = new static();
+			$obj->load_values($args);
+			$obj->save();
+			return $obj;
+		}
+		throw new ModelExistsException("Error: Model already exists!");
+	}
+	
 	// Add a new field
 	protected function add_field($name, $type) {
 		if (strtolower(get_class($type)) === "pkfield") {
@@ -139,6 +160,13 @@ abstract class Model
 	// Get fields
 	public function get_fields() {
 		return $this->fields;
+	}
+	
+	// Get field
+	public function get_field($name) {
+		if ($name == "pk")
+			$name = $this->_pk();
+		return $this->fields[$name];
 	}
 	
 	public function __get($name) {
@@ -177,7 +205,7 @@ abstract class Model
 	public function db_create_query($db) {
 		$table_name = $this->get_table_name();
 		$post_scripts = "";
-		$SQL = "CREATE TABLE " . $table_name . " (";
+		$SQL = "CREATE TABLE \"" . $table_name . "\" (";
 		$i = 0;
 		foreach ($this->get_fields() as $name => $field) {
 			if ($i > 0) $SQL .= ", ";
@@ -297,13 +325,13 @@ abstract class Model
 		$extra = "";
 		if ($db->get_type() == "psql")
 			$extra = " RETURNING " . $this->_pk();
-		return "INSERT INTO " . $this->get_table_name() . " (" . $keys . ") VALUES (" . $values . ")" . $extra . ";";
+		return "INSERT INTO \"" . $this->get_table_name() . "\" (" . $keys . ") VALUES (" . $values . ")" . $extra . ";";
 	}
 	
 	// Insert the object to the database
 	public function update_query($db) {
 		$old_object = static::get($this->pk);
-		$query = "UPDATE " . $this->get_table_name() . " SET ";
+		$query = "UPDATE \"" . $this->get_table_name() . "\" SET ";
 		$go = False;
 		foreach ($old_object->get_fields() as $name => $field) {
 			$new_val = $this->fields[$name];
@@ -329,6 +357,10 @@ abstract class Model
 		$this->create_table();
 		$db = Database::create();
 		$query = "";
+		
+		foreach ($this->get_fields() as $name => $field)
+			$field->pre_save($this, $this->from_db);
+			
 		if (!$this->from_db) {
 			$query = $db->query($this->insert_query($db));
 			$id = 0;
@@ -350,7 +382,7 @@ abstract class Model
 	}
 
 	public function delete_query($db) {
-		return "DELETE FROM " . $this->get_table_name() . " WHERE ". $this->_pk() ."='" . $this->pk . "';";
+		return "DELETE FROM \"" . $this->get_table_name() . "\" WHERE ". $this->_pk() ."='" . $this->pk . "';";
 	}
 
 	/* Returns True on success, False on failure */

@@ -1,6 +1,6 @@
 <?php
 /*
- * Evelite Core App Registration Page
+ * Evelite Core App Login Page
  *
  * Copyright 2011, AUTHORS.txt
  * Licensed under the GNU General Public License version 3.
